@@ -3,50 +3,51 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Nichol Joseph | Interstellar Portfolio</title>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+<title>Nichol Joseph | Portfolio</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Orbitron:wght@500;700&display=swap" rel="stylesheet">
 <style>
+  /* Base */
   *{margin:0;padding:0;box-sizing:border-box;font-family:'Inter',sans-serif;}
-  body{overflow-x:hidden;color:#fff;background:#000;scroll-behavior:smooth;}
-  a{text-decoration:none;color:#0ff;transition: color 0.3s;}
-  a:hover{color:#1e90ff;}
+  body{overflow-x:hidden;color:#fff;background:#0b0b0b;scroll-behavior:smooth;}
+  a{text-decoration:none;color:#ccc;transition: all 0.3s;}
+  a:hover{color:#e0e0e0;}
 
-  /* Canvas layers */
-  #nebulaCanvas,#starsCanvas,#planetCanvas{position:fixed;top:0;left:0;width:100%;height:100%;z-index:-2;pointer-events:none;}
+  /* Canvas stars */
+  #starsCanvas{position:fixed;top:0;left:0;width:100%;height:100%;z-index:-1;pointer-events:none;}
 
   /* Container */
-  .container{width:90%;max-width:1000px;margin:0 auto;padding:120px 0;}
+  .container{width:90%;max-width:1000px;margin:0 auto;padding:100px 0;}
 
   /* Header */
-  header{text-align:center;margin-bottom:50px;}
-  header h1{font-size:3em;margin-bottom:10px;text-shadow:0 0 20px #0ff;}
+  header{text-align:center;margin-bottom:50px;font-family:'Orbitron',sans-serif;}
+  header h1{font-size:3em;color:#fff;font-weight:700;}
   header p{font-size:1.2em;color:#ccc;}
 
   /* Navigation */
-  nav{position:fixed;top:0;left:0;width:100%;background:rgba(0,0,0,0.5);border-bottom:1px solid #0ff;z-index:1000;}
+  nav{position:fixed;top:0;left:0;width:100%;background:rgba(15,15,15,0.7);backdrop-filter:blur(10px);z-index:1000;}
   nav ul{display:flex;justify-content:center;list-style:none;padding:10px 0;}
   nav ul li{margin:0 15px;}
-  nav ul li a{font-weight:600;color:#0ff;transition:color 0.3s;}
-  nav ul li a:hover{color:#1e90ff;}
+  nav ul li a{font-weight:600;color:#ccc;transition:color 0.3s;}
+  nav ul li a:hover{color:#e0e0e0;}
 
   /* Sections */
-  section{margin-bottom:60px;opacity:0;transform:translateY(30px);transition:all 0.8s ease-in-out;}
+  section{margin-bottom:60px;opacity:0;transform:translateY(20px);transition:all 0.8s ease-in-out;}
   section.visible{opacity:1;transform:translateY(0);}
-  h2{font-size:2em;margin-bottom:20px;color:#0ff;border-bottom:2px solid #0ff;display:inline-block;padding-bottom:5px;text-shadow:0 0 10px #0ff;}
+  h2{font-size:2em;margin-bottom:20px;color:#fff;border-bottom:1px solid #333;display:inline-block;padding-bottom:5px;}
 
   /* Frosted Cards */
-  .card{background:rgba(20,20,30,0.6);padding:20px;border-radius:12px;box-shadow:0 4px 20px rgba(0,255,255,0.2);backdrop-filter: blur(10px);transition: transform 0.3s, box-shadow 0.3s;}
-  .card:hover{transform: translateY(-10px) rotateX(2deg);box-shadow:0 12px 25px rgba(0,255,255,0.5);}
+  .card{background:rgba(30,30,35,0.6);padding:25px;border-radius:15px;box-shadow:0 4px 15px rgba(0,0,0,0.3);backdrop-filter:blur(12px);transition:transform 0.3s, box-shadow 0.3s;}
+  .card:hover{transform:translateY(-8px);box-shadow:0 10px 20px rgba(0,0,0,0.4);}
 
   /* Projects */
   .projects{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:20px;}
-  .projects h3{margin-bottom:10px;}
+  .projects h3{margin-bottom:10px;color:#fff;}
   .projects p{color:#ccc;margin-bottom:15px;}
 
   /* Contact */
   .contact{text-align:center;}
-  .contact a{margin:0 10px;display:inline-block;padding:10px 20px;border:2px solid #0ff;border-radius:8px;font-weight:600;transition:all 0.3s;text-shadow:0 0 5px #0ff;}
-  .contact a:hover{background:#0ff;color:#000;transform: scale(1.1);box-shadow:0 0 15px #0ff;}
+  .contact a{margin:0 10px;display:inline-block;padding:10px 20px;border:1px solid rgba(255,255,255,0.2);border-radius:12px;font-weight:600;color:#ccc;transition:all 0.3s;}
+  .contact a:hover{background:rgba(255,255,255,0.1);color:#e0e0e0;box-shadow:0 5px 15px rgba(255,255,255,0.1);}
 
   /* Footer */
   footer{text-align:center;color:#777;font-size:0.9em;margin-top:40px;}
@@ -54,11 +55,8 @@
 </head>
 <body>
 
-<canvas id="nebulaCanvas"></canvas>
 <canvas id="starsCanvas"></canvas>
-<canvas id="planetCanvas"></canvas>
 
-<!-- Navigation -->
 <nav>
   <ul>
     <li><a href="#about">About</a></li>
@@ -70,12 +68,12 @@
 <div class="container">
   <header>
     <h1>Nichol Joseph</h1>
-    <p>MSc Computational Physics @ UCD | AI, Data Science & Cosmic Explorer</p>
+    <p>MSc Computational Physics @ UCD | AI & Data Science | Elegant Minimalist Portfolio</p>
   </header>
 
   <section id="about" class="card">
     <h2>About Me</h2>
-    <p>Hi! I'm Nichol, a computational physics student at UCD. I blend physics, AI, and data science to solve real-world problems. Outside academics, I explore tech, space, and innovative projects.</p>
+    <p>Hi! I'm Nichol, a computational physics student at UCD. I combine physics, AI, and data science to solve meaningful problems. I love subtle design, minimalism, and cosmic aesthetics.</p>
   </section>
 
   <section id="projects" class="card">
@@ -115,71 +113,39 @@
 
 <script>
   // Fade-in sections
-  const sections = document.querySelectorAll('section');
-  const observer = new IntersectionObserver(entries => {
-    entries.forEach(entry => { if(entry.isIntersecting){ entry.target.classList.add('visible'); } });
-  }, { threshold: 0.1 });
-  sections.forEach(section => observer.observe(section));
+  const sections=document.querySelectorAll('section');
+  const observer=new IntersectionObserver(entries=>{
+    entries.forEach(entry=>{if(entry.isIntersecting){entry.target.classList.add('visible');}});
+  },{threshold:0.1});
+  sections.forEach(section=>observer.observe(section));
 
-  // Stars with parallax
-  const starsCanvas = document.getElementById('starsCanvas');
-  const ctx = starsCanvas.getContext('2d');
-  let w = starsCanvas.width = window.innerWidth;
-  let h = starsCanvas.height = window.innerHeight;
-  const stars = [];
-  for(let i=0;i<300;i++){stars.push({x:Math.random()*w,y:Math.random()*h,r:Math.random()*1.5,speed:Math.random()*0.5});}
-  let mouseX=0, mouseY=0;
+  // Faint stars following cursor
+  const canvas=document.getElementById('starsCanvas');
+  const ctx=canvas.getContext('2d');
+  let w=canvas.width=window.innerWidth;
+  let h=canvas.height=window.innerHeight;
+  const stars=[];
+  const numStars=120;
+  for(let i=0;i<numStars;i++){
+    stars.push({x:Math.random()*w,y:Math.random()*h,r:Math.random()*1.2});
+  }
+  let mouse={x:w/2,y:h/2};
+  window.addEventListener('mousemove',e=>{mouse.x=e.clientX;mouse.y=e.clientY;});
 
   function drawStars(){
-    ctx.fillStyle="#000010";
-    ctx.fillRect(0,0,w,h);
-    for(let s of stars){
+    ctx.clearRect(0,0,w,h);
+    stars.forEach(s=>{
+      const dx=(mouse.x-s.x)/100;
+      const dy=(mouse.y-s.y)/100;
       ctx.beginPath();
-      ctx.arc(s.x,s.y,s.r,0,Math.PI*2);
-      ctx.fillStyle="#fff";
+      ctx.arc(s.x+dx,s.y+dy,s.r,0,Math.PI*2);
+      ctx.fillStyle='rgba(255,255,255,0.5)';
       ctx.fill();
-      s.x += (s.dx||0)+((mouseX-w/2)/500)*s.speed;
-      s.y += (s.dy||0)+((mouseY-h/2)/500)*s.speed;
-      if(s.x<0)s.x=w;if(s.x>w)s.x=0;
-      if(s.y<0)s.y=h;if(s.y>h)s.y=0;
-    }
+    });
     requestAnimationFrame(drawStars);
   }
   drawStars();
-  window.addEventListener('mousemove',e=>{mouseX=e.clientX;mouseY=e.clientY;});
-  window.addEventListener('resize',()=>{w=starsCanvas.width=window.innerWidth;h=starsCanvas.height=window.innerHeight;});
-
-  // Nebula layer
-  const nebulaCanvas=document.getElementById('nebulaCanvas');
-  const nCtx=nebulaCanvas.getContext('2d');
-  nebulaCanvas.width=w; nebulaCanvas.height=h;
-  const nebulaImg=new Image();
-  nebulaImg.src='https://i.imgur.com/LGZkL5V.png';
-  nebulaImg.onload=()=>{ nCtx.drawImage(nebulaImg,0,0,w,h); };
-  window.addEventListener('resize',()=>{nebulaCanvas.width=window.innerWidth; nebulaCanvas.height=window.innerHeight;});
-
-  // Planet layer
-  const planetCanvas=document.getElementById('planetCanvas');
-  const pCtx=planetCanvas.getContext('2d');
-  planetCanvas.width=w; planetCanvas.height=h;
-  const planetImg=new Image();
-  planetImg.src='https://i.imgur.com/0Z7mQnG.png'; // glowing moon/planet
-  let angle=0;
-  function drawPlanet(){
-    pCtx.clearRect(0,0,w,h);
-    const size=150;
-    const x=w*0.8+Math.sin(angle)*50;
-    const y=h*0.2+Math.cos(angle)*30;
-    pCtx.save();
-    pCtx.globalAlpha=0.8;
-    pCtx.translate(x,y);
-    pCtx.rotate(angle/10);
-    pCtx.drawImage(planetImg,-size/2,-size/2,size,size);
-    pCtx.restore();
-    angle+=0.002;
-    requestAnimationFrame(drawPlanet);
-  }
-  drawPlanet();
+  window.addEventListener('resize',()=>{w=canvas.width=window.innerWidth;h=canvas.height=window.innerHeight;});
 </script>
 
 </body>
