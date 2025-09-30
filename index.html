@@ -12,13 +12,10 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
     <style>
-        /* ------------------- */
-        /* --- CSS SETUP --- */
-        /* ------------------- */
         :root {
             --bg-color: #050505;
             --text-primary: #f0f0f0;
-            --text-secondary: #b3b3b3; /* Soft silver/grey */
+            --text-secondary: #b3b3b3;
             --glass-bg: rgba(25, 25, 25, 0.4);
             --glass-border: rgba(255, 255, 255, 0.1);
             --shadow-color: rgba(0, 0, 0, 0.35);
@@ -26,16 +23,8 @@
             --font-body: 'Inter', sans-serif;
         }
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        html {
-            scroll-behavior: smooth;
-        }
-
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
         body {
             background-color: var(--bg-color);
             color: var(--text-primary);
@@ -49,17 +38,14 @@
         /* ------------------- */
         #starfield-canvas {
             position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
             z-index: -1;
         }
         
-        /* -------------------------- */
-        /* --- REUSABLE & LAYOUT ---- */
-        /* -------------------------- */
-
+        /* ------------------- */
+        /* --- GLASS PANEL --- */
+        /* ------------------- */
         .glass-panel {
             background: var(--glass-bg);
             -webkit-backdrop-filter: blur(16px) saturate(150%);
@@ -70,15 +56,10 @@
             position: relative;
             overflow: hidden;
         }
-
         .glass-panel::before {
             content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: linear-gradient(135deg, rgba(255, 255, 255, 0.08) 0%, rgba(255, 255, 255, 0) 60%);
+            position: absolute; inset: 0;
+            background: linear-gradient(135deg, rgba(255,255,255,0.08) 0%, rgba(255,255,255,0) 60%);
             pointer-events: none;
         }
 
@@ -104,15 +85,11 @@
             transform: translateY(20px);
             animation: fadeIn 1s forwards;
         }
-
         section:nth-of-type(2) { animation-delay: 0.2s; }
         section:nth-of-type(3) { animation-delay: 0.4s; }
 
         @keyframes fadeIn {
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
+            to { opacity: 1; transform: translateY(0); }
         }
 
         h2 {
@@ -125,22 +102,45 @@
         /* ------------------- */
         /* ----- NAVBAR ------ */
         /* ------------------- */
-        nav {
+        .nav-wrapper {
             position: fixed;
             top: 20px;
             left: 50%;
             transform: translateX(-50%);
-            padding: 0.75rem 2rem;
             z-index: 100;
+            width: fit-content;
         }
 
-        nav ul {
+        /* glowing blurred gradient behind nav */
+        .nav-gradient {
+            position: absolute;
+            inset: -30px;
+            background: linear-gradient(135deg, #ff6ec4, #7873f5, #4ade80);
+            opacity: 0.5;
+            filter: blur(40px);
+            transform: skewY(-6deg);
+            border-radius: 32px;
+            z-index: -1;
+        }
+
+        /* nav pill glass */
+        .nav-glass {
+            background: rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(18px) saturate(160%);
+            -webkit-backdrop-filter: blur(18px) saturate(160%);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 999px;
+            padding: 0.75rem 2rem;
+            box-shadow: 0 8px 30px rgba(0,0,0,0.3);
+        }
+
+        .nav-glass ul {
             display: flex;
             list-style: none;
             gap: 2rem;
         }
 
-        nav a {
+        .nav-glass a {
             color: var(--text-secondary);
             text-decoration: none;
             font-family: var(--font-body);
@@ -148,29 +148,8 @@
             font-size: 0.9rem;
             transition: color 0.3s ease;
             position: relative;
-            padding: 0.25rem 0;
         }
-        
-        nav a::after {
-            content: '';
-            position: absolute;
-            bottom: -2px;
-            left: 0;
-            width: 100%;
-            height: 1px;
-            background: linear-gradient(90deg, transparent, var(--text-secondary), transparent);
-            transform: scaleX(0);
-            transform-origin: center;
-            transition: transform 0.4s cubic-bezier(0.19, 1, 0.22, 1);
-        }
-
-        nav a:hover {
-            color: var(--text-primary);
-        }
-        
-        nav a:hover::after {
-            transform: scaleX(1);
-        }
+        .nav-glass a:hover { color: var(--text-primary); }
 
         /* ------------------- */
         /* --- HERO/ABOUT ---- */
@@ -182,7 +161,6 @@
             letter-spacing: -2px;
             line-height: 1.1;
         }
-        
         #about p {
             font-size: clamp(1rem, 3vw, 1.25rem);
             color: var(--text-secondary);
@@ -199,7 +177,6 @@
             gap: 1.5rem;
             width: 100%;
         }
-
         .project-card {
             padding: 1.75rem;
             text-align: left;
@@ -207,26 +184,22 @@
             color: inherit;
             transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
-
         .project-card:hover {
             transform: translateY(-8px);
             box-shadow: 0 16px 40px 0 var(--shadow-color);
         }
-
         .project-card h3 {
             font-family: var(--font-header);
             font-size: 1.25rem;
             color: var(--text-primary);
             margin-bottom: 0.5rem;
         }
-        
         .project-card .status {
             font-size: 0.8rem;
             color: #999;
             margin-left: 0.5rem;
             font-style: italic;
         }
-
         .project-card p {
             font-size: 0.95rem;
             color: var(--text-secondary);
@@ -235,22 +208,17 @@
         /* ------------------- */
         /* ------ CONTACT ---- */
         /* ------------------- */
-        .contact-panel {
-            padding: 2rem;
-        }
-
+        .contact-panel { padding: 2rem; }
         .contact-links {
             display: flex;
             gap: 1.5rem;
             align-items: center;
         }
-
         .contact-links a {
             display: flex;
             justify-content: center;
             align-items: center;
-            width: 50px;
-            height: 50px;
+            width: 50px; height: 50px;
             color: var(--text-secondary);
             font-size: 1.5rem;
             text-decoration: none;
@@ -258,7 +226,6 @@
             border-radius: 12px;
             transition: background-color 0.3s ease, color 0.3s ease, transform 0.3s ease;
         }
-
         .contact-links a:hover {
             color: var(--text-primary);
             background-color: rgba(255, 255, 255, 0.2);
@@ -269,29 +236,11 @@
         /* --- RESPONSIVE ---- */
         /* ------------------- */
         @media (max-width: 768px) {
-            main {
-                padding: 0 1rem;
-            }
-            
-            section {
-                padding: 6rem 0;
-            }
-
-            nav {
-                padding: 0.75rem 1.5rem;
-            }
-
-            .projects-grid {
-                grid-template-columns: 1fr;
-            }
-            
-            .contact-panel {
-                padding: 1.5rem;
-            }
-
-            .contact-links {
-                gap: 1rem;
-            }
+            main { padding: 0 1rem; }
+            section { padding: 6rem 0; }
+            .projects-grid { grid-template-columns: 1fr; }
+            .contact-panel { padding: 1.5rem; }
+            .contact-links { gap: 1rem; }
         }
     </style>
 </head>
@@ -300,13 +249,17 @@
     <canvas id="starfield-canvas"></canvas>
 
     <main>
-        <nav class="glass-panel">
-            <ul>
-                <li><a href="#about">About</a></li>
-                <li><a href="#projects">Projects</a></li>
-                <li><a href="#contact">Contact</a></li>
-            </ul>
-        </nav>
+        <!-- Nav with frosted glass + gradient glow -->
+        <div class="nav-wrapper">
+            <div class="nav-gradient"></div>
+            <nav class="glass-panel nav-glass">
+                <ul>
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#projects">Projects</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
 
         <section id="about">
             <h1>Nichol Joseph</h1>
@@ -343,11 +296,11 @@
         </section>
     </main>
 
+    <!-- Starfield JS -->
     <script>
         document.addEventListener('DOMContentLoaded', () => {
             const canvas = document.getElementById('starfield-canvas');
             const ctx = canvas.getContext('2d');
-
             let width, height, stars;
 
             function init() {
@@ -357,15 +310,14 @@
                 canvas.height = height;
 
                 stars = [];
-                const numStars = Math.floor(width * height / 3000); // Adjust star density
-
+                const numStars = Math.floor(width * height / 3000);
                 for (let i = 0; i < numStars; i++) {
                     const speedFactor = Math.random();
                     stars.push({
                         x: Math.random() * width,
                         y: Math.random() * height,
-                        radius: speedFactor * 1.5 + 0.5, // Larger stars are faster
-                        speed: speedFactor * 0.5 + 0.25, // Base speed
+                        radius: speedFactor * 1.5 + 0.5,
+                        speed: speedFactor * 0.5 + 0.25,
                         opacity: Math.random() * 0.6 + 0.2
                     });
                 }
@@ -373,12 +325,10 @@
 
             function animate() {
                 ctx.clearRect(0, 0, width, height);
-
                 stars.forEach(star => {
                     drawStar(star);
                     updateStar(star);
                 });
-                
                 requestAnimationFrame(animate);
             }
 
@@ -390,9 +340,7 @@
             }
 
             function updateStar(star) {
-                star.x -= star.speed; // Move star to the left
-
-                // If star goes off-screen, reset it to the right with a new vertical position
+                star.x -= star.speed;
                 if (star.x < -star.radius) {
                     star.x = width + star.radius;
                     star.y = Math.random() * height;
@@ -400,7 +348,6 @@
             }
 
             window.addEventListener('resize', init);
-
             init();
             animate();
         });
